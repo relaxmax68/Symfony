@@ -3,19 +3,52 @@
 {% extends "::layout.html.twig" %}
 
 {% block title %}
-	Annonces - {{ parent() }}
+	Annonces - OC Plateforme
 {% endblock %}
 
 {% block body %}
 
-	{# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
-	<h1>Annonces</h1>
+   <div id="header" class="jumbotron">
+      <h1>Ma plateforme d'annonces</h1>
+      <p>
+        Ce projet est propulsé par Symfony2,
+        et construit grâce au MOOC OpenClassrooms et SensioLabs.
+      </p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="http://fr.openclassrooms.com/informatique/cours/developpez-votre-site-web-avec-le-framework-symfony2">
+          Participer au MOOC »
+        </a>
+      </p>
+    </div>
 
-	<hr>
+    <div class="row">
+      <div id="menu" class="col-md-3">
+        <h3>Les annonces</h3>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="{{ path('oc_platform_home') }}">Accueil</a></li>
+          <li><a href="{{ path('oc_platform_add') }}">Ajouter une annonce</a></li>
+        </ul>
 
-	{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
-	{% block ocplatform_body %}
-	{% endblock %}
+        <h4>Dernières annonces</h4>
+        {{ render(controller("OCPlatformBundle:Advert:menu", {'limit': 3})) }}
+      </div>
+
+      <div id="content" class="col-md-9">
+		{# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+		<h1>Annonces</h1>
+
+		<hr>
+
+		{# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+		{% block ocplatform_body %}
+		{% endblock %}
+      </div>
+    </div>
+
+    <hr>
 
 {% endblock %}
 
+{% block footer %}
+	Responsable du site : {{ webmaster }}.
+{% endblock %}
