@@ -5,7 +5,7 @@
 namespace OC\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -18,8 +18,7 @@ class AdvertController extends Controller
     }
     public function viewAction($id)
     {
-	    $url = $this->get('router')->generate('oc_platform_home');
-	    return new RedirectResponse($url);
+  		return new JsonResponse(array('id' => $id));
 	}
 	public function viewSlugAction($slug, $year, $format)
     {
