@@ -6,6 +6,8 @@ namespace OC\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class AdvertController extends Controller
 {
@@ -14,9 +16,10 @@ class AdvertController extends Controller
 		$content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig',array('nom'=>'Maxime'));
 	    return new Response($content);
     }
-    public function viewAction($id)
+    public function viewAction($id, Request $request)
     {
-	    return new Response("Affichage de l'annonce d'id : ".$id);
+	    $tag=$request->query->get('tag');
+	    return new Response("Affichage de l'annonce d'id : ".$id.", avec le tag : ".$tag);
 	}
 	public function viewSlugAction($slug, $year, $format)
     {
