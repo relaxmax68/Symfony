@@ -16,10 +16,9 @@ class AdvertController extends Controller
 		$content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig',array('nom'=>'Maxime'));
 	    return new Response($content);
     }
-    public function viewAction($id, Request $request)
+    public function viewAction($id)
     {
-	    $tag=$request->query->get('tag');
-	    return new Response("Affichage de l'annonce d'id : ".$id.", avec le tag : ".$tag);
+    	return $this->render('OCPlatformBundle:Advert:view.html.twig',array('id'  => $id));
 	}
 	public function viewSlugAction($slug, $year, $format)
     {
