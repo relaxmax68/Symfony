@@ -20,9 +20,30 @@ class AdvertController extends Controller
 	      // une page d'erreur 404 (qu'on pourra personnaliser plus tard d'ailleurs)
 	      throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
 	    }
-	    // Ici, on récupérera la liste des annonces, puis on la passera au template
-	    // Mais pour l'instant, on ne fait qu'appeler le template
-	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array('listAdverts' => array()
+		// Notre liste d'annonce en dur
+	    $listAdverts = array(
+	      array(
+	        'title'   => 'Recherche développpeur Symfony2',
+	        'id'      => 1,
+	        'author'  => 'Alexandre',
+	        'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+	        'date'    => new \Datetime()),
+	      array(
+	        'title'   => 'Mission de webmaster',
+	        'id'      => 2,
+	        'author'  => 'Hugo',
+	        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+	        'date'    => new \Datetime()),
+	      array(
+	        'title'   => 'Offre de stage webdesigner',
+	        'id'      => 3,
+	        'author'  => 'Mathieu',
+	        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+	        'date'    => new \Datetime())
+	    );
+	    // Et modifiez le 2nd argument pour injecter notre liste
+	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
+	      'listAdverts' => $listAdverts
 	    ));
     }
     public function menuAction($limit)
@@ -43,7 +64,17 @@ class AdvertController extends Controller
     }
 	public function viewAction($id)
 	{
-		return $this->render('OCPlatformBundle:Advert:view.html.twig', array('id' => $id));
+	    $advert = array(
+	      'title'   => 'Recherche développpeur Symfony2',
+	      'id'      => $id,
+	      'author'  => 'Alexandre',
+	      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+	      'date'    => new \Datetime()
+	    );
+
+	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+	      'advert' => $advert
+	    ));
 	}
 	public function addAction(Request $request)
 	{
@@ -71,7 +102,18 @@ class AdvertController extends Controller
 	        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
 	        return $this->redirect($this->generateUrl('oc_platform_view', array('id' => 5)));
 	    }
-	    return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+
+	    $advert = array(
+	      'title'   => 'Recherche développpeur Symfony2',
+	      'id'      => $id,
+	      'author'  => 'Alexandre',
+	      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+	      'date'    => new \Datetime()
+	    );
+
+	    return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
+	      'advert' => $advert
+	    ));
     }
     public function deleteAction($id)
     {
