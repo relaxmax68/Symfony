@@ -22,9 +22,10 @@ class AdvertController extends Controller
 	    }
 	    // Ici, on récupérera la liste des annonces, puis on la passera au template
 	    // Mais pour l'instant, on ne fait qu'appeler le template
-	    return $this->render('OCPlatformBundle:Advert:index.html.twig');
+	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array('listAdverts' => array()
+	    ));
     }
-    public function menuAction()
+    public function menuAction($limit)
     {
 	    // On fixe en dur une liste ici, bien entendu par la suite
 	    // on la récupérera depuis la BDD !
