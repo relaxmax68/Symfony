@@ -2,7 +2,7 @@
 parameters:
     database_host: 127.0.0.1
     database_port: null
-    database_name: filmotheque
+    database_name: symfony
     database_user: raoul
     database_password: musique
     mailer_transport: smtp
