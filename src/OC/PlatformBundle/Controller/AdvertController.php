@@ -8,6 +8,7 @@ namespace OC\PlatformBundle\Controller;
 use OC\PlatformBundle\Entity\Advert;
 use OC\PlatformBundle\Entity\Image;
 use OC\PlatformBundle\Entity\Application;
+use OC\PlatformBundle\Entity\Categorie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

@@ -17,19 +17,20 @@
   <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
 
   <div class="well">
+
     {{ advert.content }}
     <hr>
+
     {% for application in listApplications %}
-    <div class="container row">
-    <div class="btn btn-default">
-        {{ application.content }}
-        par {{ application.author }}
-    </div>
-    </div>    
+      <div class="container row">
+        <div class="btn btn-default">
+            {{ application.content }}
+            par {{ application.author }}
+        </div>
+      </div>
+
     {% else %}
-
       <li>Pas (encore !) de candidatures</li>
-
     {% endfor %}
 
   </div>
