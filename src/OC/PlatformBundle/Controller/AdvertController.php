@@ -78,14 +78,23 @@ class AdvertController extends Controller
 	}
 	public function addAction(Request $request)
 	{
-    // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
-    // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
-	    if ($request->isMethod('POST')) {
-	        // Ici, on s'occupera de la création et de la gestion du formulaire
-	        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
-	        // Puis on redirige vers la page de visualisation de cettte annonce
-	        return $this->redirect($this->generateUrl('oc_platform_view', array('id' => 5)));
-    	}
+    	// On récupère le service
+    	$antispam = $this->container->get('oc_platform.antispam');
+
+	    // Je pars du principe que $text contient le texte d'un message quelconque
+	    $text = '...';
+	    if ($antispam->isSpam($text)) {
+	      throw new \Exception('Votre message a été détecté comme spam !');
+	    }else{
+	    	// La gestion d'un formulaire est particulière, mais l'idée est la suivante :
+	    	// Si la requête est en POST, c'est que le visiteur a soumis le formulaire
+		    if ($request->isMethod('POST')) {
+		        // Ici, on s'occupera de la création et de la gestion du formulaire
+		        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+		        // Puis on redirige vers la page de visualisation de cettte annonce
+		        return $this->redirect($this->generateUrl('oc_platform_view', array('id' => 5)));
+	    	}
+	    }
 	    // Si on n'est pas en POST, alors on affiche le formulaire
 	    return $this->render('OCPlatformBundle:Advert:add.html.twig');
 	}
