@@ -2,7 +2,11 @@
 
 {% extends "OCPlatformBundle::layout.html.twig" %}
 
-{% block body %}
+{% block title %}
+  Ajout d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
 
   <h2>Ajouter une annonce</h2>
 
